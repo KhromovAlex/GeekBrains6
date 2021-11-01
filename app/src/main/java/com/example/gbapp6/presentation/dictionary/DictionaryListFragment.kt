@@ -5,29 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbapp6.R
 import com.example.gbapp6.databinding.FragmentDictionaryListBinding
+import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
-import com.example.gbapp6.presentation.common.AbsFragment
 import com.example.gbapp6.presentation.dictionary.adapter.DictionaryListAdapter
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class DictionaryListFragment :
-    AbsFragment<DictionaryListView, DictionaryPresenter>(R.layout.fragment_dictionary_list),
-    DictionaryListView {
+    DaggerFragment(R.layout.fragment_dictionary_list) {
+
     @Inject
-    lateinit var dictionaryPresenter: DictionaryPresenter
+    lateinit var dictionaryListViewModelFactory: DictionaryListViewModelFactory
+
+    private val viewModel: DictionaryListViewModel by viewModels {
+        dictionaryListViewModelFactory
+    }
 
     private var _binding: FragmentDictionaryListBinding? = null
 
     private val binding get() = _binding!!
 
     private val dictionaryListAdapter = DictionaryListAdapter()
-
-    override fun createPresenter(): DictionaryPresenter = dictionaryPresenter
-
-    override fun getCurrentView(): DictionaryListView = this
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,19 +46,24 @@ class DictionaryListFragment :
         binding.dictionaryList.layoutManager = LinearLayoutManager(requireContext())
         binding.dictionaryList.adapter = dictionaryListAdapter
 
+        viewModel.liveData.observe(viewLifecycleOwner, ::renderData)
+
         binding.searchBar.setEndIconOnClickListener {
             val text: String? = binding.searchBar.editText?.text?.toString()
-            text?.let { word -> getPresenterOrNull()?.getData(word) }
+            text?.let { word -> viewModel.getData(word) }
         }
 
     }
 
-    override fun renderList(list: List<DataModel>) {
-        dictionaryListAdapter.submitList(list)
-    }
-
-    override fun renderError(throwable: Throwable) {
-        Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+    private fun renderData(appState: AppState<List<DataModel>>) {
+        when (appState) {
+            is AppState.Error -> {
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
+            is AppState.Success -> {
+                dictionaryListAdapter.submitList(appState.data)
+            }
+        }
     }
 
     override fun onDestroy() {
