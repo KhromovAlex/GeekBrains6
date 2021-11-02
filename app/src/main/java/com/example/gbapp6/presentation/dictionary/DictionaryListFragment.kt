@@ -5,25 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbapp6.R
 import com.example.gbapp6.databinding.FragmentDictionaryListBinding
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.presentation.dictionary.adapter.DictionaryListAdapter
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DictionaryListFragment :
-    DaggerFragment(R.layout.fragment_dictionary_list) {
+    Fragment(R.layout.fragment_dictionary_list) {
 
-    @Inject
-    lateinit var dictionaryListViewModelFactory: DictionaryListViewModelFactory
-
-    private val viewModel: DictionaryListViewModel by viewModels {
-        dictionaryListViewModelFactory
-    }
+    private val viewModel: DictionaryListViewModel by viewModel()
 
     private var _binding: FragmentDictionaryListBinding? = null
 
