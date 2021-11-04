@@ -6,35 +6,38 @@ import androidx.lifecycle.ViewModel
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.domain.repository.DictionaryRepository
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.kotlin.plusAssign
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-class DictionaryListViewModel @Inject constructor(
+class DictionaryListViewModel(
     private val dictionaryRepository: DictionaryRepository,
-    private val schedulers: com.example.gbapp6.scheduler.Schedulers
 ) : ViewModel() {
 
-    private val disposable = CompositeDisposable()
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private var job: Job? = null
 
     private val _liveData = MutableLiveData<AppState<List<DataModel>>>()
     val liveData: LiveData<AppState<List<DataModel>>> = _liveData
 
     fun getData(word: String) {
-        disposable +=
-            dictionaryRepository
-                .getData(word)
-                .observeOn(schedulers.main())
-                .subscribeOn(schedulers.background())
-                .subscribe(
-                    { _liveData.postValue(AppState.Success(it)) },
-                    { _liveData.postValue(AppState.Error(it)) }
-                )
+        job?.cancel()
+        job = scope.launch {
+            try {
+                val data = dictionaryRepository
+                    .getData(word)
+                _liveData.postValue(AppState.Success(data))
+            } catch (e: Throwable) {
+                _liveData.postValue(AppState.Error(e))
+            }
+
+        }
 
     }
 
     override fun onCleared() {
         super.onCleared()
-        disposable.dispose()
+        job?.cancel()
     }
 }
