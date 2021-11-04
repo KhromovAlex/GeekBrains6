@@ -1,17 +1,19 @@
 package com.example.gbapp6
 
-import com.example.gbapp6.di.DaggerAppComponent
-import com.example.gbapp6.scheduler.DefaultSchedulers
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Application
+import com.example.gbapp6.di.DI
+import org.koin.core.context.startKoin
 
-class App : DaggerApplication() {
+class App : Application() {
 
-    override fun applicationInjector(): AndroidInjector<App> =
-        DaggerAppComponent
-            .builder()
-            .withContext(applicationContext)
-            .withSchedulers(DefaultSchedulers())
-            .build()
+    override fun onCreate() {
+        super.onCreate()
+
+        startKoin {
+            modules(
+                DI.getModule()
+            )
+        }
+    }
 
 }

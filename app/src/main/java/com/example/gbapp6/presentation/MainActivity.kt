@@ -1,6 +1,6 @@
 package com.example.gbapp6.presentation
 
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gbapp6.R
-import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : DaggerAppCompatActivity(R.layout.activity_main)
+class MainActivity : AppCompatActivity(R.layout.activity_main)
