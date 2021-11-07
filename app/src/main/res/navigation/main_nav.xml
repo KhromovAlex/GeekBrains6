@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/dictionaryListFragment"
-        android:name="com.example.gbapp6.presentation.dictionary.DictionaryListFragment"
+        android:name="com.example.gbapp6.presentation.dictionary.StopwatchFragment"
         android:label="fragment_dictionary_list"
-        tools:layout="@layout/fragment_dictionary_list" />
+        tools:layout="@layout/fragment_stopwatch" />
 
 </navigation>
