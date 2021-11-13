@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.domain.repository.DictionaryRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class DictionaryListViewModel(
     private val dictionaryRepository: DictionaryRepository,
@@ -38,6 +35,6 @@ class DictionaryListViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        job?.cancel()
+        scope.cancel()
     }
 }

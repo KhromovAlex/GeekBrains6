@@ -16,11 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object DI {
 
+    private const val BASE_URL = "https://dictionary.skyeng.ru/"
+
     fun getModule() = module {
 
         single<DictionaryApi> {
             Retrofit.Builder()
-                .baseUrl("https://dictionary.skyeng.ru/")
+                .baseUrl(BASE_URL)
                 .client(
                     OkHttpClient.Builder()
                         .addInterceptor(HttpLoggingInterceptor().apply {
