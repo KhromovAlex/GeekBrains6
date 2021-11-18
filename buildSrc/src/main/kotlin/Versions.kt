@@ -1,0 +1,17 @@
+object Versions {
+    const val LOGGING_INTERCEPTOR = "4.9.1"
+    const val RETROFIT = "2.9.0"
+    const val RX_JAVA = "3.0.0"
+    const val ROOM = "2.3.0"
+    const val GLIDE = "4.12.0"
+    const val KOIN = "3.1.2"
+    const val NAVIGATION = "2.3.5"
+    const val DAGGER = "2.38.1"
+    const val COROUTINES = "1.5.2"
+    const val FRAGMENT_KTX = "1.3.6"
+    const val SUPPORT_V4 = "1.0.0"
+    const val CONSTRAINT_LAYOUT = "2.1.1"
+    const val MATERIAL = "1.4.0"
+    const val APPCOMPAT = "1.3.1"
+    const val CORE_KTX = "1.7.0"
+}

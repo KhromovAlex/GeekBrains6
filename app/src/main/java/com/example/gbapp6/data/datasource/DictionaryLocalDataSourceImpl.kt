@@ -1,8 +1,8 @@
 package com.example.gbapp6.data.datasource
 
 import androidx.lifecycle.LiveData
-import com.example.gbapp6.data.database.DataBase
-import com.example.gbapp6.data.database.table.DefinitionModel
+import com.example.database.DataBase
+import com.example.database.table.DefinitionModel
 
 class DictionaryLocalDataSourceImpl(
     private val dataBase: DataBase

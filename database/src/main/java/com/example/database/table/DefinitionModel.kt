@@ -1,4 +1,4 @@
-package com.example.gbapp6.data.database.table
+package com.example.database.table
 
 import androidx.room.Embedded
 import androidx.room.Relation

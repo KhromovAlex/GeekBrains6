@@ -1,10 +1,10 @@
-package com.example.gbapp6.data.database.dao
+package com.example.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.gbapp6.data.database.table.Definition
-import com.example.gbapp6.data.database.table.DefinitionModel
-import com.example.gbapp6.data.database.table.Meanings
+import com.example.database.table.Definition
+import com.example.database.table.DefinitionModel
+import com.example.database.table.Meanings
 
 @Dao
 interface DefinitionDao {

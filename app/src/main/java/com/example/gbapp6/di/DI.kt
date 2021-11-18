@@ -1,8 +1,8 @@
 package com.example.gbapp6.di
 
 import androidx.room.Room
+import com.example.database.DataBase
 import com.example.gbapp6.data.api.DictionaryApi
-import com.example.gbapp6.data.database.DataBase
 import com.example.gbapp6.data.datasource.DictionaryLocalDataSource
 import com.example.gbapp6.data.datasource.DictionaryLocalDataSourceImpl
 import com.example.gbapp6.data.datasource.DictionaryRemoteDataSource
