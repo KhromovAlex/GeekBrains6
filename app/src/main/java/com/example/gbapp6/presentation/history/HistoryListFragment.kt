@@ -15,10 +15,15 @@ import com.example.gbapp6.databinding.FragmentHistoryListBinding
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.presentation.history.adapter.HistoryListAdapter
+import org.koin.androidx.scope.fragmentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.scope.Scope
 
 class HistoryListFragment :
-    Fragment(R.layout.fragment_history_list) {
+    Fragment(R.layout.fragment_history_list), KoinScopeComponent {
+
+    override val scope: Scope by fragmentScope()
 
     private val viewModel: HistoryListViewModel by viewModel()
 
@@ -44,9 +49,7 @@ class HistoryListFragment :
 
         nav = Navigation.findNavController(view)
 
-        if (savedInstanceState == null) {
-            viewModel.getData().observe(viewLifecycleOwner, ::renderData)
-        }
+        viewModel.getData().observe(viewLifecycleOwner, ::renderData)
 
         binding.historyList.layoutManager = LinearLayoutManager(requireContext())
         binding.historyList.adapter = historyListAdapter

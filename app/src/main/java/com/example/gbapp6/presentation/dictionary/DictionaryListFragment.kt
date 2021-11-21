@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -14,10 +15,16 @@ import com.example.gbapp6.databinding.FragmentDictionaryListBinding
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.presentation.dictionary.adapter.DictionaryListAdapter
+import com.example.gbapp6.presentation.utils.viewById
+import org.koin.androidx.scope.fragmentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.scope.Scope
 
 class DictionaryListFragment :
-    Fragment(R.layout.fragment_dictionary_list) {
+    Fragment(R.layout.fragment_dictionary_list), KoinScopeComponent {
+
+    override val scope: Scope by fragmentScope()
 
     private val viewModel: DictionaryListViewModel by viewModel()
 
@@ -53,7 +60,9 @@ class DictionaryListFragment :
             text?.let { word -> viewModel.getData(word) }
         }
 
-        binding.navToHistory.setOnClickListener {
+        val navToHistory by viewById<Button>(R.id.navToHistory)
+
+        navToHistory.setOnClickListener {
             nav?.navigate(R.id.historyListFragment)
         }
 

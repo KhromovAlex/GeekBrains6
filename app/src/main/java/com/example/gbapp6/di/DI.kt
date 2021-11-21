@@ -9,7 +9,9 @@ import com.example.gbapp6.data.datasource.DictionaryRemoteDataSource
 import com.example.gbapp6.data.datasource.DictionaryRemoteDataSourceImpl
 import com.example.gbapp6.domain.repository.DictionaryRepository
 import com.example.gbapp6.domain.repository.DictionaryRepositoryImpl
+import com.example.gbapp6.presentation.dictionary.DictionaryListFragment
 import com.example.gbapp6.presentation.dictionary.DictionaryListViewModel
+import com.example.gbapp6.presentation.history.HistoryListFragment
 import com.example.gbapp6.presentation.history.HistoryListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -59,9 +61,13 @@ object DI {
             )
         }
 
-        viewModel { DictionaryListViewModel(dictionaryRepository = get()) }
+        scope<HistoryListFragment> {
+            viewModel { HistoryListViewModel(dictionaryRepository = get()) }
+        }
 
-        viewModel { HistoryListViewModel(dictionaryRepository = get()) }
+        scope<DictionaryListFragment> {
+            viewModel { DictionaryListViewModel(dictionaryRepository = get()) }
+        }
 
     }
 
