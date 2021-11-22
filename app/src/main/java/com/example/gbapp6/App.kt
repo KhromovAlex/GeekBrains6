@@ -2,6 +2,7 @@ package com.example.gbapp6
 
 import android.app.Application
 import com.example.gbapp6.di.DI
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class App : Application() {
@@ -10,6 +11,7 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
+            androidContext(applicationContext)
             modules(
                 DI.getModule()
             )

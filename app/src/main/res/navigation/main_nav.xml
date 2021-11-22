@@ -9,6 +9,21 @@
         android:id="@+id/dictionaryListFragment"
         android:name="com.example.gbapp6.presentation.dictionary.DictionaryListFragment"
         android:label="fragment_dictionary_list"
-        tools:layout="@layout/fragment_dictionary_list" />
+        tools:layout="@layout/fragment_dictionary_list" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyListFragment"
+        android:name="com.example.gbapp6.presentation.history.HistoryListFragment"
+        android:label="fragment_history_list"
+        tools:layout="@layout/fragment_history_list" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyDetailsListFragment"
+        android:name="com.example.gbapp6.presentation.history.HistoryDetailsFragment"
+        android:label="fragment_history_details"
+        tools:layout="@layout/fragment_history_details" >
+    </fragment>
 
 </navigation>

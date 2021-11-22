@@ -1,4 +1,4 @@
-package com.example.gbapp6.presentation.dictionary.adapter
+package com.example.gbapp6.presentation.history.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gbapp6.R
 import com.example.gbapp6.domain.entity.DataModel
-import com.example.gbapp6.presentation.history.adapter.HistoryListDiffUtil
-import com.example.gbapp6.presentation.history.adapter.HistoryListViewHolder
 
-class DictionaryListAdapter :
+class HistoryListAdapter :
     RecyclerView.Adapter<HistoryListViewHolder>() {
     private val list: MutableList<DataModel> = mutableListOf()
 

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbapp6.R
 import com.example.gbapp6.databinding.FragmentDictionaryListBinding
@@ -25,6 +27,8 @@ class DictionaryListFragment :
 
     private val dictionaryListAdapter = DictionaryListAdapter()
 
+    private var nav: NavController? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +41,8 @@ class DictionaryListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        nav = Navigation.findNavController(view)
+
         binding.dictionaryList.layoutManager = LinearLayoutManager(requireContext())
         binding.dictionaryList.adapter = dictionaryListAdapter
 
@@ -47,16 +53,18 @@ class DictionaryListFragment :
             text?.let { word -> viewModel.getData(word) }
         }
 
+        binding.navToHistory.setOnClickListener {
+            nav?.navigate(R.id.historyListFragment)
+        }
+
     }
 
     private fun renderData(appState: AppState<List<DataModel>>) {
         when (appState) {
-            is AppState.Error -> {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-            }
             is AppState.Success -> {
                 dictionaryListAdapter.submitList(appState.data)
             }
+            else -> Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
         }
     }
 

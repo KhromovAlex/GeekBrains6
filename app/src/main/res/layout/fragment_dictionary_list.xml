@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.dictionary.DictionaryListFragment">
+    tools:context=".presentation.history.HistoryListFragment">
+
+    <Button
+        android:id="@+id/navToHistory"
+        android:layout_width="match_parent"
+        android:text="@string/to_history"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dictionaryList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="parent"
-
-        tools:context=".presentation.dictionary.DictionaryListFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/navToHistory"
+        tools:context=".presentation.history.HistoryListFragment" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchBar"

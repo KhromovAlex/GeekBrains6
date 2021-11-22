@@ -1,5 +1,10 @@
 package com.example.gbapp6.domain.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class Translation(@field:SerializedName("text") val translation: String?)
+@Parcelize
+data class Translation(
+    @SerializedName("text") val translation: String?,
+) : Parcelable
