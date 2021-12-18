@@ -2,11 +2,11 @@ package com.example.gbapp6.domain.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.gbapp6.data.database.table.Definition
-import com.example.gbapp6.data.database.table.DefinitionModel
-import com.example.gbapp6.data.database.table.Meanings as MeaningsDb
+import com.example.database.table.Definition
+import com.example.database.table.DefinitionModel
+import com.example.database.table.Meanings as MeaningsDb
 import com.example.gbapp6.domain.entity.Meanings as MeaningsEntity
-import com.example.gbapp6.data.database.table.Translation as TranslationDb
+import com.example.database.table.Translation as TranslationDb
 import com.example.gbapp6.domain.entity.Translation as TranslationEntity
 import com.example.gbapp6.data.datasource.DictionaryLocalDataSource
 import com.example.gbapp6.data.datasource.DictionaryRemoteDataSource
@@ -32,9 +32,9 @@ class DictionaryRepositoryImpl(
     override fun getHistoryByText(text: String): DataModel =
         mapDbToEntity(dictionaryLocalDataSource.getByText(text))
 
-    private fun mapEntityToDb(entityModel: DataModel): DefinitionModel =
-        DefinitionModel(
-            definition = Definition(
+    private fun mapEntityToDb(entityModel: DataModel): com.example.database.table.DefinitionModel =
+        com.example.database.table.DefinitionModel(
+            definition = com.example.database.table.Definition(
                 id = entityModel.id,
                 text = entityModel.text,
             ),
@@ -49,7 +49,7 @@ class DictionaryRepositoryImpl(
             },
         )
 
-    private fun mapDbToEntity(dbModel: DefinitionModel): DataModel =
+    private fun mapDbToEntity(dbModel: com.example.database.table.DefinitionModel): DataModel =
         DataModel(
             id = dbModel.definition.id,
             text = dbModel.definition.text,
