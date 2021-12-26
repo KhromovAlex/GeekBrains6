@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.gbapp6.data.dispatchers.DispatchersProvider
 import com.example.gbapp6.domain.entity.AppState
 import com.example.gbapp6.domain.entity.DataModel
 import com.example.gbapp6.domain.repository.DictionaryRepository
@@ -11,9 +12,10 @@ import kotlinx.coroutines.*
 
 class HistoryListViewModel(
     private val dictionaryRepository: DictionaryRepository,
+    dispatchersProvider: DispatchersProvider,
 ) : ViewModel() {
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(dispatchersProvider.background())
     private var job: Job? = null
 
     private val _liveData = MutableLiveData<AppState<DataModel>>()

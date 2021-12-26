@@ -7,6 +7,8 @@ import com.example.gbapp6.data.datasource.DictionaryLocalDataSource
 import com.example.gbapp6.data.datasource.DictionaryLocalDataSourceImpl
 import com.example.gbapp6.data.datasource.DictionaryRemoteDataSource
 import com.example.gbapp6.data.datasource.DictionaryRemoteDataSourceImpl
+import com.example.gbapp6.data.dispatchers.DispatchersProvider
+import com.example.gbapp6.data.dispatchers.DispatchersProviderDefault
 import com.example.gbapp6.domain.repository.DictionaryRepository
 import com.example.gbapp6.domain.repository.DictionaryRepositoryImpl
 import com.example.gbapp6.presentation.dictionary.DictionaryListViewModel
@@ -25,6 +27,10 @@ object DI {
     private const val BASE_URL = "https://dictionary.skyeng.ru/"
 
     fun getModule() = module {
+
+        single<DispatchersProvider> {
+            DispatchersProviderDefault()
+        }
 
         single {
             Room
@@ -59,9 +65,9 @@ object DI {
             )
         }
 
-        viewModel { DictionaryListViewModel(dictionaryRepository = get()) }
+        viewModel { DictionaryListViewModel(dictionaryRepository = get(), dispatchersProvider = get()) }
 
-        viewModel { HistoryListViewModel(dictionaryRepository = get()) }
+        viewModel { HistoryListViewModel(dictionaryRepository = get(), dispatchersProvider = get()) }
 
     }
 
